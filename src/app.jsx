@@ -1,7 +1,6 @@
-import { Router } from "preact-router";
-import { routes } from "./routes";
-import { Home } from "./routes/home";
-import "./app.css";
+import { Router } from 'preact-router'
+import { routes, Home } from './routes'
+import './app.css'
 
 export function App() {
   return (
@@ -13,5 +12,5 @@ export function App() {
         ))}
       </Router>
     </div>
-  );
+  )
 }
