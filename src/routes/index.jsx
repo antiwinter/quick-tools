@@ -1,9 +1,9 @@
 // src/routes/index.js
 import { Link } from 'preact-router'
 
-let r = import.meta.globEager('./!(index).js')
+let r = import.meta.globEager('./!(index).jsx')
 export const routes = Object.keys(r).map(k => {
-  let name = k.replace('./', '').replace('.js', '')
+  let name = k.replace('./', '').replace('.jsx', '')
   return {
     name,
     path: '/' + name,
@@ -20,7 +20,10 @@ export function Home() {
         {
           // add a link to each route
           routes.map(r => (
-            <Link href={r.path}>{r.name}</Link>
+            <>
+              <Link href={r.path}>{r.name}</Link>
+              <br />
+            </>
           ))
         }
       </nav>
