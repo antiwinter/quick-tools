@@ -6,7 +6,7 @@ export const routes = Object.keys(r).map(k => {
   let name = k.replace('./', '').replace('.jsx', '')
   return {
     name,
-    path: '/' + name,
+    path: __BASE_URL__ + name,
     component: r[k].Main
   }
 })
@@ -20,10 +20,9 @@ export function Home() {
         {
           // add a link to each route
           routes.map(r => (
-            <>
+            <div key={r.path}>
               <Link href={r.path}>{r.name}</Link>
-              <br />
-            </>
+            </div>
           ))
         }
       </nav>

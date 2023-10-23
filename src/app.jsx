@@ -8,7 +8,7 @@ export function App() {
   return (
     <div>
       <Router>
-        <Home path="/" />
+        <Home path={__BASE_URL__} />
         {routes.map(({ path, component: RouteComponent }) => (
           <RouteComponent path={path} />
         ))}
