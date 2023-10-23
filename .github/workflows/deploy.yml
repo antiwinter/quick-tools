@@ -20,7 +20,7 @@ build:
     - yarn
     - yarn build
   only:
-    - master
+    - main
 
 deploy:
   stage: deploy
@@ -29,4 +29,4 @@ deploy:
     # Add your deployment commands here
     - mv dist .gitee_pages
   only:
-    - master
+    - main
