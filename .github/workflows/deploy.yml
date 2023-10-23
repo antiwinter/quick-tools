@@ -1,32 +1,29 @@
-image: ubuntu:18.04
+name: Build and Deploy to GitHub Pages
 
-stages:
-  - build
-  - deploy
+on:
+  push:
+    branches:
+      - main  # Adjust if deploying from another branch
 
-variables:
-  APP_NAME: "quick-tools"
-  ENVIRONMENT: "production"
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-before_script:
-  - apt-get update
-  - apt-get install -y curl
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Adjust based on your project's needs
 
-build:
-  stage: build
-  script:
-    - echo "Building ${APP_NAME}..."
-    # Add your build commands here
-    - yarn
-    - yarn build
-  only:
-    - main
+    - name: Install and build
+      run: |
+        yarn
+        yarn build
 
-deploy:
-  stage: deploy
-  script:
-    - echo "Deploying ${APP_NAME} to ${ENVIRONMENT}..."
-    # Add your deployment commands here
-    - mv dist .gitee_pages
-  only:
-    - main
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist  # Or your build output directory
