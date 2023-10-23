@@ -1,0 +1,32 @@
+image: ubuntu:18.04
+
+stages:
+  - build
+  - deploy
+
+variables:
+  APP_NAME: "quick-tools"
+  ENVIRONMENT: "production"
+
+before_script:
+  - apt-get update
+  - apt-get install -y curl
+
+build:
+  stage: build
+  script:
+    - echo "Building ${APP_NAME}..."
+    # Add your build commands here
+    - yarn
+    - yarn build
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying ${APP_NAME} to ${ENVIRONMENT}..."
+    # Add your deployment commands here
+    - mv dist .gitee_pages
+  only:
+    - master

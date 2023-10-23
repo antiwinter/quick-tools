@@ -37,6 +37,7 @@ export class Main extends Component {
     const file = files[0]
     const reader = new FileReader()
     reader.onload = async e => {
+      this.state.characterStats = {}
       const content = e.target.result
       const detected = jschardet.detect(content)
       const encoding = detected.encoding || 'GBK'
@@ -46,6 +47,7 @@ export class Main extends Component {
 
         const tunedText = decodedText.replace(/[\x21-\x7d]+/g, match => {
           let k = `${match}`
+          if (k.length < 4 && !isNaN(parseInt(k))) return k
           this.state.characterStats[k] = (this.state.characterStats[k] || 0) + 1
           return ''
         })
