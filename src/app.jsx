@@ -7,7 +7,7 @@ console.log('router base', __BASE_URL__)
 export function App() {
   return (
     <div>
-      <Router base={__BASE_URL__}>
+      <Router>
         <Home path="/" />
         {routes.map(({ path, component: RouteComponent }) => (
           <RouteComponent path={path} />
