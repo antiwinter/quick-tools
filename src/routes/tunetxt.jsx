@@ -77,7 +77,8 @@ export class Main extends Component {
     const url = window.URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `${this.state.fileDetails.name}-tuned`
+    // replace original file name by adding "-tuned" before the extension
+    a.download = this.state.fileDetails.name.replace(/(\.[^.]+)?$/, '-tuned$1')
     a.click()
     window.URL.revokeObjectURL(url)
   }
